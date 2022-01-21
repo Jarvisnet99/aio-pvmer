@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="aio-pvmer">
+    <output-path>$USER_HOME$/DreamBot/Scripts</output-path>
+    <root id="archive" name="aio-pvmer.jar">
+      <element id="module-output" name="aio-pvmer" />
+    </root>
+  </artifact>
+</component>
