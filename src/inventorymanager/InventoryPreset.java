@@ -10,12 +10,13 @@ import java.util.ArrayList;
 // CLASS: InventoryPreset
 // The purpose of this class is to create a preset of items that the local player
 // can withdraw from the bank.
+// AUTHOR: Hmm
 //*********************************************************************************
 public class InventoryPreset {
 
     private ArrayList<String> itemName = new ArrayList<String>();
-    private String[] inventoryItemArray = new String[28];
-    private int[] inventoryQuantityArray = new int[28];
+    private String[] inventoryItemArray;
+    private int[] inventoryQuantityArray;
 
     //*********************************************************************************
     // CONSTRUCTOR: InventoryPreset Constructor
@@ -36,7 +37,7 @@ public class InventoryPreset {
     }
 
     //*********************************************************************************
-    // MUTATOR: getInventoryArray()
+    // MUTATOR: setInventoryArray()
     // Sets the inventoryItemArray
     //*********************************************************************************
     public void setInventoryArray(String[] setInventoryArray) {
@@ -74,7 +75,7 @@ public class InventoryPreset {
 
     //*********************************************************************************
     // RETURN METHOD: toString()
-    // Neatly prints out the preset information.
+    // Neatly prints out the inventory preset information.
     //*********************************************************************************
     public String toString() {
         StringBuilder inventoryDetails = new StringBuilder();

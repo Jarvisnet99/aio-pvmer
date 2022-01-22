@@ -1,5 +1,8 @@
+import equipmentmanager.EquipmentPreset;
 import framework.Module;
 import inventorymanager.InventoryPresetLoader;
+import org.dreambot.api.methods.MethodProvider;
+import org.dreambot.api.methods.container.impl.equipment.EquipmentSlot;
 import org.dreambot.api.script.AbstractScript;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManifest;
@@ -18,12 +21,16 @@ public class Main extends AbstractScript {
     @Override
     public void onStart() {
 
-        currentModule.addTask(i);
 
     }
 
     @Override
     public int onLoop() {
-        return currentModule.execute();
+        String[] d = {"Black wizard hat (g)", "Team-29 cape", "Amulet of power"};
+        int[] slots = {EquipmentSlot.AMULET.getSlot()};
+        EquipmentPreset eq = new EquipmentPreset(d);
+        eq.withdrawEquipmentPreset();
+        eq.wieldEquipmentPreset();
+        return 1000;
     }
 }
