@@ -6,6 +6,7 @@ import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.bank.Bank;
 import org.dreambot.api.wrappers.items.Item;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,18 +32,17 @@ public class InventoryPresetLoader implements Task {
             return 500;
 
         }
-        setInventoryPreset(new String[]{"Staff of fire", "Death rune"});
+
+        String[] array = new String[]{"Death rune", "Mind rune", "Air rune"};
+        int[] quantity = new int[] {100, 100, 2};
+
+        InventoryPreset ip = new InventoryPreset(array, quantity);
+        //p.withdrawPresetInventory();
+        MethodProvider.log(ip.toString());
 
 
         return 1000;
 
     }
 
-    public void setInventoryPreset(String itemName[]) {
-
-        for (String item : itemName) {
-            Bank.withdraw(item);
-        }
-
-    }
 }
