@@ -1,4 +1,4 @@
-package equipmentmanager;
+package Utility.equipmentmanager;
 
 
 import org.dreambot.api.methods.container.impl.Inventory;

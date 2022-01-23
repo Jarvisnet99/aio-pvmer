@@ -1,4 +1,4 @@
-package inventorymanager;
+package Utility.inventorymanager;
 
 import org.dreambot.api.methods.MethodProvider;
 import org.dreambot.api.methods.container.impl.Inventory;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 //*********************************************************************************
 // CLASS: InventoryPreset
-// The purpose of this class is to create a preset of items that the local player
+// The purpose of this class is to create an inventory preset of items that the local player
 // can withdraw from the bank.
 // AUTHOR: Hmm
 //*********************************************************************************
