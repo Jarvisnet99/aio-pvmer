@@ -26,16 +26,10 @@ public class Autocast {
         return widgetChild != null && widgetChild.isVisible();
     }
 
-    public static void clearAutocastSpell() {
-        openChooseSpell();
-        WidgetChild cancel = Widgets.getWidgetChild(201, 1, 0);
-        if (PlayerSettings.getBitValue(276) != 0) {
-            cancel.interact();
-        }
-    }
-
-    public static void selectAutocastSpell(WidgetChild spell) {
-        if (PlayerSettings.getBitValue(276) == 0) {
+    public static void selectAutocastSpell(String spellName, int varbit) {
+        if (PlayerSettings.getBitValue(276) != varbit) {
+            openChooseSpell();
+            WidgetChild spell = Widgets.getMatchingWidget(w -> w != null && w.hasAction(spellName));
             spell.interact();
         }
     }

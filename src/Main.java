@@ -1,4 +1,5 @@
 import Utility.autocastmanager.Autocast;
+import Utility.autocastmanager.VarbitForSpells;
 import Utility.frameworkmanager.Module;
 import Utility.minigameteleportmanager.MinigameTeleporter;
 import org.dreambot.api.methods.widget.Widgets;
@@ -25,11 +26,7 @@ public class Main extends AbstractScript {
 
     @Override
     public int onLoop() {
-        Autocast.openChooseSpell();
-        WidgetChild windStrike = Widgets.getWidgetChild(201, 1, 1);
-        Autocast.clearAutocastSpell();
-        Autocast.selectAutocastSpell(windStrike);
-
+        Autocast.selectAutocastSpell("Fire Strike", VarbitForSpells.FIRE_STRIKE.getVarbit());
         return 1000;
     }
 }
