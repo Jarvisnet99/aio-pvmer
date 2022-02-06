@@ -1,7 +1,9 @@
 package Utility.minigameteleportmanager;
 
 import org.dreambot.api.input.Mouse;
+import org.dreambot.api.methods.Calculations;
 import org.dreambot.api.methods.MethodProvider;
+import org.dreambot.api.methods.settings.PlayerSettings;
 import org.dreambot.api.methods.tabs.Tab;
 import org.dreambot.api.methods.tabs.Tabs;
 import org.dreambot.api.methods.widget.Widgets;
@@ -13,15 +15,12 @@ public class MinigameTeleporter {
 
 
     public static void openMinigameTab() {
+        final int CLANTABBITVALUE = 3;
         if (Tabs.open(Tab.CLAN)) {
-            WidgetChild groupingTab = Widgets.getWidgetChild(707, 6, 3);
-            WidgetChild clanTab = Widgets.getChildWidget(164, 37);
-
-            if (groupingTab != null) {
-                if (!clanTab.getActions()[0].equals("Grouping")) {
-                    groupingTab.interact();
-                    MethodProvider.sleepUntil(() -> clanTab.getActions()[0].equals("Grouping"), 6000);
-                }
+            if (PlayerSettings.getBitValue(13071) != CLANTABBITVALUE) {
+                WidgetChild groupingTab = Widgets.getWidgetChild(707, 6, 3);
+                groupingTab.interact();
+                MethodProvider.sleepUntil(() -> PlayerSettings.getBitValue(13071) == CLANTABBITVALUE, Calculations.random(2500, 5000));
             }
         }
     }
@@ -37,13 +36,22 @@ public class MinigameTeleporter {
             }
 
             WidgetChild nameOfMinigame = Widgets.getMatchingWidget(w -> w != null && w.getText().equals(minigameName));
+            WidgetChild scrollBar = Widgets.getWidgetChild(76, 19, 1);
+            MethodProvider.log(scrollBar.getRectangle().getY());
 
-            if (Mouse.move(activityPanel.getRectangle()) && !activityPanel.getRectangle().contains(nameOfMinigame.getRectangle())) {
+            if (Mouse.move(activityPanel.getRectangle()) && scrollBar.getRectangle().getY() != 246.0) {
+                Mouse.scrollUpUntil(1000, () -> scrollBar.getRectangle().getY() == 246.0);
+                MethodProvider.sleepUntil(() -> scrollBar.getRectangle().getY() == 246, 5000);
+            }
+
+            if (scrollBar.getRectangle().getY() == 246 &&
+                    Mouse.move(activityPanel.getRectangle()) &&
+                    !activityPanel.getRectangle().contains(nameOfMinigame.getRectangle())) {
                 Mouse.scrollDownUntil(1000, () -> activityPanel.getRectangle().contains(nameOfMinigame.getRectangle()));
             }
 
             if (nameOfMinigame.interact()) {
-                MethodProvider.sleepUntil(() -> activitySelect.getText().equals(minigameName), 1000);
+                MethodProvider.sleepUntil(() -> activitySelect.getText().equals(minigameName), 1500);
             }
 
         } else if (activitySelect.getText().equals(minigameName) && !getLocalPlayer().isAnimating()) {
